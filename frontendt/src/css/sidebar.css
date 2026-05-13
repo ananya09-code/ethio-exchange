@@ -1,0 +1,120 @@
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* ================= CARD ================= */
+
+.card-section {
+  background: rgb(250, 252, 255);
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ================= ITEMS ================= */
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.item:hover {
+  background: #dbeafe;
+  transform: translateX(3px);
+}
+
+/* Active item */
+.active {
+  background: #3b82f6;
+  color: white;
+}
+
+/* ================= ICONS ================= */
+
+.logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* ================= HEADINGS ================= */
+
+.card-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 14px;
+  color: #111827;
+}
+
+/* ================= SCROLLBAR ================= */
+
+.sidebar::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
+}
+
+
+
+/* ================= MOBILE ================= */
+
+
+
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+    overflow-x: auto;
+    overflow-y: auto;
+
+    scroll-behavior: smooth;
+    padding-bottom: 8px;
+  }
+
+  /* Make each card scrollable horizontally */
+  .card-section {
+    min-width: 260px;
+    max-height: 350px;
+
+    overflow-y: auto;
+
+    flex-shrink: 0;
+  }
+
+  /* Better scrolling */
+  .card-section::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .card-section::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 20px;
+  }
+
+  .item {
+    white-space: nowrap;
+  }
+}

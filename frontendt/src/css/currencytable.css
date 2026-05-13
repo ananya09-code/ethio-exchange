@@ -1,0 +1,87 @@
+
+.table-con{
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  padding: 10px;
+  background: #f4f7fb;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: system-ui, sans-serif;
+  margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+ 
+
+
+}
+
+th,
+td {
+  font-weight: 600;
+  padding: 14px 15px;
+  text-align: left;
+  border: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #1f2937;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+}
+
+tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+tbody tr:hover {
+  background-color: #f0f9ff;
+}
+
+.bank-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.table-con {
+  overflow-x: auto;
+  width: 100%;
+  max-width: 100%; 
+}
+
+.buy{
+  color: rgb(0, 197, 0);
+}
+
+.sell{
+  color: red;
+}
+
+.date{
+  color: rgb(130, 128, 128);
+}
+
+
+.code-cell img {
+  width: 22px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 3px;
+}

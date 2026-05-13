@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #114eb0;
+    color: white;
+}
+
+/* Left side */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 35px;
+    height: 35px;
+}
+
+/* Right side */
+.api {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: 500;
+}
+
+.hdate {
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.header {
+    background: rgba(17, 78, 176, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}

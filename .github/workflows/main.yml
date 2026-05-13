@@ -25,4 +25,5 @@ jobs:
         run: python -m playwright install --with-deps
 
       - name: Run scraper
-        run: python backend/app/services/run_all.py
+        working-directory: backend
+        run: python app/services/run_all.py

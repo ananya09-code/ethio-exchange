@@ -1,11 +1,12 @@
 from fastapi import FastAPI
-from app.api.apidatabase import SessionLocal
+from app.api.apidatabase import SessionLocal, engine, Base
 from app.api.apimodel import Rate
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select, func
 from pydantic import BaseModel
-import os
 
+# THIS LINE creates the table if it doesn't exist
+Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 class currency(BaseModel):

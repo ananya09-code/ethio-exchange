@@ -2,20 +2,24 @@ from fastapi import FastAPI
 from app.api.apidatabase import SessionLocal
 from app.api.apimodel import Rate
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import select,func
+from sqlalchemy import select, func
 from pydantic import BaseModel
+import os
+
 app = FastAPI()
+
 class currency(BaseModel):
-    code:str
+    code: str
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # React Vite
+    allow_origins=["*"],  # fix after frontend is deployed
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# rest of your code stays the same...
 @app.get("/")
 def get_all_rates():
     db = SessionLocal()

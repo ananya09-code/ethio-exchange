@@ -34,4 +34,3 @@ def get_dashen_rates():
         }
 
         return das_data
-

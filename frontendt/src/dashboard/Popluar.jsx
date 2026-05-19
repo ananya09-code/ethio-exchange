@@ -7,61 +7,34 @@ function Popluar({ selectedCurrency }) {
 
   const [data, setData] = useState({});
   const [dataaverage, setDataaverage] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+  if (!selectedCurrency) return;
 
-    const fetchData = async () => {
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const [highLowRes, avgRes] = await Promise.all([
+        axios.get(`http://127.0.0.1:8000/high-low/${selectedCurrency}`),
+        axios.get(`http://127.0.0.1:8000/average/${selectedCurrency}`)
+      ]);
 
-      try {
+      setData(highLowRes.data);
+      setDataaverage(avgRes.data);
+      console.log(highLowRes.data, avgRes.data);  
 
-        const response = await axios.post(
-          `http://127.0.0.1:8000/high&low/${selectedCurrency}`
-        );
-
-        setData(response.data);
-
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (selectedCurrency) {
-      fetchData();
+    } catch (error) {
+      console.error(error);
     }
-
-  }, [selectedCurrency]); 
-
-
-
-
-
-
-
-
-
-
-    useEffect(() => {
-
-    const fetchaverage = async () => {
-
-      try {
-
-        const response = await axios.post(
-          `http://127.0.0.1:8000/avage/${selectedCurrency}`
-        );
-
-        setDataaverage(response.data);
-
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (selectedCurrency) {
-      fetchaverage();
+     finally {
+      setLoading(false);
     }
+  };
 
-  }, [selectedCurrency]); 
+  fetchData();
+}, [selectedCurrency]);
+
 
   return (
     <div className="card-con">

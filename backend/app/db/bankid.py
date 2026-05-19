@@ -1,22 +1,41 @@
-from app.db.database import get_connection
+from .database import SessionLocal
+from .model import Bank
 
-def get_or_create_bank_id(name: str):
-    conn = get_connection()
-    cur = conn.cursor()
 
-    # check if bank exists
-    cur.execute("SELECT id FROM banks WHERE name = ?", (name,))
-    row = cur.fetchone()
+def get_or_create_bank_id(bank_name):
 
-    if row:
-        conn.close()
-        return row[0]
+    db = SessionLocal()
 
-    # insert if not exists
-    cur.execute("INSERT INTO banks (name) VALUES (?)", (name,))
-    conn.commit()
+    try:
 
-    bank_id = cur.lastrowid
-    conn.close()
+        # normalize
+        bank_name = bank_name.strip().lower()
 
-    return bank_id
+        # check existing bank
+        bank = (
+            db.query(Bank)
+            .filter(Bank.name == bank_name)
+            .first()
+        )
+
+        # if exists
+        if bank:
+            return bank.id
+
+        # create new bank
+        new_bank = Bank(name=bank_name)
+
+        db.add(new_bank)
+        db.commit()
+        db.refresh(new_bank)
+
+        return new_bank.id
+
+    except Exception as e:
+
+        db.rollback()
+        print("BANK ERROR:", e)
+
+    finally:
+
+        db.close()

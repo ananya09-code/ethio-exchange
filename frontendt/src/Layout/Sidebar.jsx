@@ -25,12 +25,7 @@ function Sidebar({ data, onSelectBank, onSelectCurrency }) {
 
   const [activeBank, setActiveBank] = useState(null);
   const [activeCurrency, setActiveCurrency] = useState(null);
-  const [isOpen, setIsOpen] = useState(() => {
-    if (typeof window !== "undefined") {
-      return window.innerWidth > 768;
-    }
-    return true;
-  });
+  const [isMobile, setIsMobile] = useState(false);
 
   // banks
   useEffect(() => {
@@ -48,7 +43,7 @@ function Sidebar({ data, onSelectBank, onSelectCurrency }) {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsOpen(window.innerWidth > 768);
+      setIsMobile(window.innerWidth <= 768);
     };
 
     handleResize();
@@ -57,80 +52,115 @@ function Sidebar({ data, onSelectBank, onSelectCurrency }) {
   }, []);
 
   return (
-    <div className={`sidebar ${isOpen ? "open" : "collapsed"}`}>
-      <div className="sidebar-toggle">
-        <span>Filters</span>
-        <button
-          type="button"
-          onClick={() => setIsOpen(prev => !prev)}
-          className="toggle-button"
-        >
-          {isOpen ? "Hide" : "Show"}
-        </button>
-      </div>
-
-      <div className="sidebar-content">
-        {/* BANKS */}
-        <div className="card-section">
-          <h3>🏦 Banks</h3>
-
-          <div
-            className={activeBank === null ? "active item" : "item"}
-            onClick={() => {
-              setActiveBank(null);
-              onSelectBank(null);
-            }}
-          >
-            <i className="fa-solid fa-grip"></i> All Banks
-          </div>
-
-          {banks.map(name => (
-            <div
-              key={name}
-              className={activeBank === name ? "active item" : "item"}
-              onClick={() => {
-                setActiveBank(name);
-                onSelectBank(name);
+    <div className="sidebar">
+      {isMobile && (
+        <div className="mobile-filters">
+          <div className="mobile-select">
+            <label htmlFor="bank-select">Bank</label>
+            <select
+              id="bank-select"
+              value={activeBank ?? ""}
+              onChange={e => {
+                const value = e.target.value || null;
+                setActiveBank(value);
+                onSelectBank(value);
               }}
             >
-              <img
-                src={logos[name.toLowerCase()] || cbe}
-                className="logo"
-                alt={name}
-              />
-              {name}
-            </div>
-          ))}
-        </div>
-
-        {/* CURRENCIES */}
-        <div className="card-section">
-          <h3>💱 Currencies</h3>
-
-          <div
-            className={activeCurrency === null ? "active item" : "item"}
-            onClick={() => {
-              setActiveCurrency(null);
-              onSelectCurrency(null);
-            }}
-          >
-            <i className="fa-solid fa-money-bill-transfer"></i> All Currencies
+              <option value="">All Banks</option>
+              {banks.map(name => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
+            </select>
           </div>
 
-          {currencies.map(code => (
-            <div
-              key={code}
-              className={activeCurrency === code ? "active item" : "item"}
-              onClick={() => {
-                setActiveCurrency(code);
-                onSelectCurrency(code);
+          <div className="mobile-select">
+            <label htmlFor="currency-select">Currency</label>
+            <select
+              id="currency-select"
+              value={activeCurrency ?? ""}
+              onChange={e => {
+                const value = e.target.value || null;
+                setActiveCurrency(value);
+                onSelectCurrency(value);
               }}
             >
-              {code}
-            </div>
-          ))}
+              <option value="">All Currencies</option>
+              {currencies.map(code => (
+                <option key={code} value={code}>
+                  {code}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
+      )}
+
+      {!isMobile && (
+        <div className="sidebar-content">
+          {/* BANKS */}
+          <div className="card-section">
+            <h3>🏦 Banks</h3>
+
+            <div
+              className={activeBank === null ? "active item" : "item"}
+              onClick={() => {
+                setActiveBank(null);
+                onSelectBank(null);
+              }}
+            >
+              <i className="fa-solid fa-grip"></i> All Banks
+            </div>
+
+            {banks.map(name => (
+              <div
+                key={name}
+                className={activeBank === name ? "active item" : "item"}
+                onClick={() => {
+                  setActiveBank(name);
+                  onSelectBank(name);
+                }}
+              >
+                <img
+                  src={logos[name.toLowerCase()] || cbe}
+                  className="logo"
+                  alt={name}
+                />
+                {name}
+              </div>
+            ))}
+          </div>
+
+          {/* CURRENCIES */}
+          <div className="card-section">
+            <h3>💱 Currencies</h3>
+
+            <div
+              className={activeCurrency === null ? "active item" : "item"}
+              onClick={() => {
+                setActiveCurrency(null);
+                onSelectCurrency(null);
+              }}
+            >
+              <i className="fa-solid fa-money-bill-transfer"></i> All Currencies
+            </div>
+
+            {currencies.map(code => (
+              <div
+                key={code}
+                className={activeCurrency === code ? "active item" : "item"}
+                onClick={() => {
+                  setActiveCurrency(code);
+                  onSelectCurrency(code);
+                }}
+              >
+                {code}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

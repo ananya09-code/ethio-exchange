@@ -54,7 +54,7 @@ function CurrencyTable({ data, selected, selectedCurrency }) {
           {filteredData.length > 0 ? (
             filteredData.map((item, index) => (
               <tr key={index}>
-                <td className="bank-cell">
+                <td className="bank-cell" data-label="Bank Name">
                   <img
                     src={logos[item.bank_name.toLowerCase()] || cbe}
                     alt={item.bank_name}
@@ -63,7 +63,8 @@ function CurrencyTable({ data, selected, selectedCurrency }) {
                   {item.bank_name}
                 </td>
 
-          <td className="code-cell">
+          
+                <td className="code-cell" data-label="Currency">
   <img
     src={
       codelogo?.[item.currency_code?.toLowerCase()]
@@ -73,9 +74,9 @@ function CurrencyTable({ data, selected, selectedCurrency }) {
     alt="flag"
   />    <span>{item.currency_code}</span>
 </td>
-                <td className="buy">{item.buy}</td>
-                <td className="sell">{item.sell}</td>
-                <td className="date">
+                <td className="buy" data-label="Buy">{item.buy}</td>
+                <td className="sell" data-label="Sell">{item.sell}</td>
+                <td className="date" data-label="Date">
                  {new Date(item.created_at).toLocaleString("en-US", {
                      month: "short",
                      day: "numeric",
@@ -85,7 +86,7 @@ function CurrencyTable({ data, selected, selectedCurrency }) {
             ))
           ) : (
             <tr>
-              <td colSpan="4">No data available</td>
+              <td colSpan="5">No data available</td>
             </tr>
           )}
         </tbody>

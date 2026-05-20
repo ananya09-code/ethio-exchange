@@ -85,3 +85,42 @@ tbody tr:hover {
   object-fit: cover;
   border-radius: 3px;
 }
+
+
+/* MOBILE: stacked card-style table rows */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+
+  tbody tr {
+    background: #ffffff;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    border: 1px solid #e6eefc;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border: none;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  td:last-child { border-bottom: none; }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #6b7280;
+    margin-right: 12px;
+    flex: 0 0 auto;
+  }
+
+  .bank-cell, .code-cell { gap: 8px; }
+  .table-logo { width: 26px; height: 26px; }
+  th { display: none; }
+}

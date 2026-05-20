@@ -40,3 +40,42 @@
 }
 
 
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 12px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .logo img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .logo h1 {
+    font-size: 1rem;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .api {
+    flex: 0 0 auto;
+    margin-left: 8px;
+  }
+
+  .hdate {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0.95;
+  }
+}
+
+

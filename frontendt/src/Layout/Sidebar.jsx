@@ -54,7 +54,15 @@ function Sidebar({ data, onSelectBank, onSelectCurrency }) {
   return (
     <div className="sidebar">
       {isMobile && (
-        <div className="mobile-filters">
+        <div className="mobile-filters card-section mobile-card">
+          <div className="mobile-filters-header">
+            <div>
+              <h3>Filters</h3>
+              <p>Choose bank and currency for mobile view</p>
+            </div>
+            <span className="mobile-tag">Quick</span>
+          </div>
+
           <div className="mobile-select">
             <label htmlFor="bank-select">Bank</label>
             <select

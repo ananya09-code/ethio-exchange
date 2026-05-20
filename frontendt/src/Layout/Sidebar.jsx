@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import cbe from "../assets/logo/CBE.png";
 import awash from "../assets/logo/awsah.webp";
-import dashen from "../assets/logo/dashen.png";
+import dashen from "../assets/logo/Dashen.png";
 import nib from "../assets/logo/nib.webp";
 import abyssinia from "../assets/logo/abyssinia.webp";
 import abay from "../assets/logo/abay.webp";

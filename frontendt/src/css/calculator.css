@@ -73,7 +73,9 @@ button:hover {
 }
 
 .result {
-  min-width: 280px;
+  min-width: auto;
+  width: 100%;
+  max-width: 420px;
   background: linear-gradient(135deg, #2563eb, #1e40af);
   border-radius: 18px;
   display: flex;
@@ -86,13 +88,13 @@ button:hover {
 }
 
 .result h3 {
-  font-size: 3rem;
+  font-size: clamp(1.4rem, 4vw, 2.25rem);
   font-weight: 800;
   color: #e1e1e1;
   margin: 0;
   letter-spacing: 0.5px;
   font-family:  Outfit, Inter, ui-sans-serif;
-  line-height: 4.25rem;
+  line-height: 2.5rem;
 }
 .result p:first-child {
   margin-bottom: .5rem;
@@ -133,7 +135,8 @@ button:hover {
     width: 100%;
   }
 
-  .result h1 {
+  .result h3 {
     font-size: 1.6rem;
+    line-height: 2rem;
   }
 }

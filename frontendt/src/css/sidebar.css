@@ -96,7 +96,9 @@
 
   /* Make each card scrollable horizontally */
   .card-section {
-    min-width: 260px;
+    /* allow smaller card widths on phones so the row fits better */
+    min-width: 160px;
+    max-width: 260px;
     max-height: 350px;
 
     overflow-y: auto;

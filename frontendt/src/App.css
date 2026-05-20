@@ -10,7 +10,7 @@
 .app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   overflow-x: auto;
   
 }
@@ -63,6 +63,9 @@ header {
   .main {
     height: auto;
   }
+
+  /* prevent unwanted horizontal scroll on small screens */
+  html, body, .app { overflow-x: hidden; }
 }
 
 /* Small phones */

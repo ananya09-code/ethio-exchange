@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     const getdata = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}`);
         setdata(response.data);
       } catch (error) {
         console.log(error);

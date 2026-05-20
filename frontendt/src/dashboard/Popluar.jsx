@@ -16,8 +16,8 @@ function Popluar({ selectedCurrency }) {
     setLoading(true);
     try {
       const [highLowRes, avgRes] = await Promise.all([
-        axios.get(`http://127.0.0.1:8000/high-low/${selectedCurrency}`),
-        axios.get(`http://127.0.0.1:8000/average/${selectedCurrency}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/high-low/${selectedCurrency}`),
+        axios.get(`${import.meta.env.VITE_API_URL}/average/${selectedCurrency}`)
       ]);
 
       setData(highLowRes.data);

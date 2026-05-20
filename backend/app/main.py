@@ -23,7 +23,7 @@ Base.metadata.create_all(bind=engine)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://ethio-exchange-yzzz.vercel.app/"
+        "https://ethio-exchange-yzzz.vercel.app"
     ],
     allow_credentials=True, 
     allow_methods=["*"],

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import "../css/Popluar.css";
+import "../css/popluar.css";
 import axios from 'axios';
 
 function Popluar({ selectedCurrency }) {

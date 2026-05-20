@@ -9,7 +9,7 @@ def get_cbe_rates():
 
     url = f"{base_url}?_limit=1&Date={target_date}"
 
-    res = requests.get(url, timeout=10)
+    res = requests.get(url, timeout=30)
     data = res.json()
 
     if not data:
@@ -39,5 +39,3 @@ def get_cbe_rates():
 
     return cbe_data
 
-
-print(get_cbe_rates())

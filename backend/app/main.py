@@ -25,11 +25,10 @@ app.add_middleware(
     allow_origins=[
         "https://ethio-exchange-yzzz.vercel.app"
     ],
-    allow_credentials=True, 
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 # -----------------------------------
 # SCHEDULER (auto update rates)
 # -----------------------------------

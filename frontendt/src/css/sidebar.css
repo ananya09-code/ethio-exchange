@@ -58,6 +58,38 @@
   color: #111827;
 }
 
+/* Sidebar toggle for mobile */
+.sidebar-toggle {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.sidebar-toggle span {
+  font-weight: 600;
+}
+
+.toggle-button {
+  border: none;
+  background: #3b82f6;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar.collapsed .sidebar-content {
+  display: none;
+}
+
 /* ================= SCROLLBAR ================= */
 
 .sidebar::-webkit-scrollbar {
@@ -84,39 +116,32 @@
   .sidebar {
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 12px;
-
-    overflow-x: auto;
-    overflow-y: auto;
-
-    scroll-behavior: smooth;
     padding-bottom: 8px;
   }
 
-  /* Make each card scrollable horizontally */
+  .sidebar-toggle {
+    display: flex;
+  }
+
+  .sidebar-content {
+    gap: 12px;
+  }
+
   .card-section {
-    /* allow smaller card widths on phones so the row fits better */
-    min-width: 160px;
-    max-width: 260px;
-    max-height: 350px;
-
-    overflow-y: auto;
-
-    flex-shrink: 0;
-  }
-
-  /* Better scrolling */
-  .card-section::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  .card-section::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 20px;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
   }
 
   .item {
-    white-space: nowrap;
+    white-space: normal;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .item:hover {
+    transform: none;
   }
 }

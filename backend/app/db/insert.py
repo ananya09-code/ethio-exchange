@@ -2,6 +2,7 @@ from .database import SessionLocal
 from .model import Rate
 
 from datetime import datetime
+from sqlalchemy import func
 
 
 def insert_rate(bank_id, bank_name, code, buy, sell):
@@ -20,21 +21,24 @@ def insert_rate(bank_id, bank_name, code, buy, sell):
         buy = float(buy)
         sell = float(sell)
 
+        today = datetime.utcnow().date()
+
         # ----------------------------
-        # CHECK EXISTING RATE
+        # CHECK TODAY'S RATE ONLY
         # ----------------------------
 
         existing_rate = (
             db.query(Rate)
             .filter(
                 Rate.bank_id == bank_id,
-                Rate.currency_code == code
+                Rate.currency_code == code,
+                func.date(Rate.created_at) == today
             )
             .first()
         )
 
         # ----------------------------
-        # UPDATE EXISTING
+        # UPDATE IF ALREADY EXISTS TODAY
         # ----------------------------
 
         if existing_rate:
@@ -45,7 +49,7 @@ def insert_rate(bank_id, bank_name, code, buy, sell):
             existing_rate.created_at = datetime.utcnow()
 
         # ----------------------------
-        # INSERT NEW
+        # INSERT NEW DAY RECORD
         # ----------------------------
 
         else:
@@ -56,12 +60,13 @@ def insert_rate(bank_id, bank_name, code, buy, sell):
                 currency_code=code,
                 buy=buy,
                 sell=sell,
+                created_at=datetime.utcnow()
             )
 
             db.add(new_rate)
 
         # ----------------------------
-        # SAVE TO NEON
+        # SAVE
         # ----------------------------
 
         db.commit()

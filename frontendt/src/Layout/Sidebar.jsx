@@ -1,6 +1,7 @@
 import "../css/sidebar.css";
 import { useState, useEffect } from "react";
 
+
 import cbe from "../assets/logo/CBE.png";
 import awash from "../assets/logo/awsah.webp";
 import dashen from "../assets/logo/Dashen.png";
@@ -8,16 +9,8 @@ import nib from "../assets/logo/nib.webp";
 import abyssinia from "../assets/logo/abyssinia.webp";
 import abay from "../assets/logo/abay.webp";
 import hibret from "../assets/logo/hibret.svg";
-import Berhan from "../assets/logo/Berhan.png";
-import cbe from "../assets/logo/CBE.png";
-import awash from "../assets/logo/awsah.webp";
-import dashen from "../assets/logo/Dashen.png";
-import nib from "../assets/logo/nib.webp";
-import abyssinia from "../assets/logo/abyssinia.webp";
-import abay from "../assets/logo/abay.webp";
-import hibret from "../assets/logo/hibret.svg";
-import Berhan from "../assets/logo/Berhan.png";
-import Addis from "../assets/logo/Addis.png";
+import berhan from "../assets/logo/Berhan.png";
+import addis from "../assets/logo/Addis.png";
 import wegagen from "../assets/logo/Wegagen.png";
 import zemen from "../assets/logo/Zemen.png";
 import bunna from "../assets/logo/Bunna.png";
@@ -33,6 +26,7 @@ import siinqee from "../assets/logo/Siinqee.png";
 import development from "../assets/logo/Development.png";
 import cooperative from "../assets/logo/Cooperative.png";
 import gohbetoch from "../assets/logo/Gohbetoch.png";
+
 const logos = {
   cbe,
   awash,
@@ -41,24 +35,23 @@ const logos = {
   abyssinia,
   abay,
   hibret,
-  Berhan,
+  berhan,
+  addis,
+  wegagen,
   zemen,
   bunna,
-  amhara, 
+  amhara,
   oromia,
   ahadu,
   gadaa,
   enat,
   global,
-  rammis, 
+  rammis,
   hijra,
   siinqee,
   development,
   cooperative,
   gohbetoch,
-  Addis,
-  wegagen,
-  
 };
 
 function Sidebar({ data, onSelectBank, onSelectCurrency }) {

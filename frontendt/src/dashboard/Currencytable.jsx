@@ -23,7 +23,7 @@ import hijra from "../assets/logo/Hijra.png";
 import siinqee from "../assets/logo/Siinqee.png";
 import development from "../assets/logo/Development.png";
 import cooperative from "../assets/logo/Cooperative.png";
-import gohbetoch from "../assets/logo/Gohbetoch.png";
+
 
 const logos = {
   cbe,
@@ -49,7 +49,7 @@ const logos = {
   siinqee,
   development,
   cooperative,
-  gohbetoch,
+
 };
 
 

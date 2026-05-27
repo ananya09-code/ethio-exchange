@@ -14,7 +14,7 @@ import zemen from "../assets/logo/Zemen.png";
 import bunna from "../assets/logo/Bunna.png";
 import amhara from "../assets/logo/Amhara.png";
 import oromia from "../assets/logo/Oromia.png";
-import ahadu from "../assets/logo/Ahadu.png";
+import ahadu from "../assets/logo/Ahadu.svg";
 import gadaa from "../assets/logo/Gadaa.png";
 import enat from "../assets/logo/Enat.png";
 import global from "../assets/logo/Global.svg";

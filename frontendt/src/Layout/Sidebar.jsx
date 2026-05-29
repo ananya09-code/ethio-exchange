@@ -54,13 +54,15 @@ const logos = {
   
 };
 
-function Sidebar({ data, onSelectBank, onSelectCurrency }) {
+function Sidebar({ data, onSelectBank, onSelectCurrency, onSelectDate }) {
   const [banks, setBanks] = useState([]);
   const [currencies, setCurrencies] = useState([]);
 
   const [activeBank, setActiveBank] = useState(null);
   const [activeCurrency, setActiveCurrency] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
+  console.log("Sidebar data:", selectedDate);
 
   // banks
   useEffect(() => {
@@ -126,7 +128,7 @@ function Sidebar({ data, onSelectBank, onSelectCurrency }) {
               onChange={e => {
                 const value = e.target.value || null;
                 setActiveCurrency(value);
-                onSelectCurrency(value);
+               
               }}
             >
               <option value="">All Currencies</option>
@@ -142,6 +144,20 @@ function Sidebar({ data, onSelectBank, onSelectCurrency }) {
 
       {!isMobile && (
         <div className="sidebar-content">
+          <div className="date-card">
+            <legend><i class="fa-solid fa-calendar"></i> Date</legend>
+            <input
+              type="date"
+              id="date"
+              value={selectedDate}
+              onChange={e => {
+                const value = e.target.value || null;
+                setSelectedDate(value);
+                onSelectDate(value);
+              }}
+            />
+          </div>
+
           {/* BANKS */}
           <div className="card-section">
             <h3>🏦 Banks</h3>

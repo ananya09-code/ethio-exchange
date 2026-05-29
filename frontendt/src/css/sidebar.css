@@ -15,6 +15,7 @@
   padding: 16px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 8px;
 }
 
 /* ================= ITEMS ================= */
@@ -145,6 +146,31 @@
   background: #cbd5e1;
   border-radius: 20px;
 }
+
+
+
+
+.date-card{
+  background: rgb(250, 252, 255);
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

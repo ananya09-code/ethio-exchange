@@ -53,7 +53,7 @@ const logos = {
 };
 
 
-function CurrencyTable({ data, selected, selectedCurrency }) {
+function CurrencyTable({ data, selected, selectedCurrency, selectedDate }) {
 
   const filteredData = data.filter((item) => {
     const bankMatch = selected
@@ -62,9 +62,13 @@ function CurrencyTable({ data, selected, selectedCurrency }) {
 
     const currencyMatch = selectedCurrency
       ? item.currency_code === selectedCurrency
-      : true;
+        : true
 
-    return bankMatch && currencyMatch;
+    const dateMatch = selectedDate
+      ? item.created_at.startsWith(selectedDate)
+        : true;
+
+    return bankMatch && currencyMatch && dateMatch;
   });
 
   return (

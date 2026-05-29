@@ -12,6 +12,7 @@ function App() {
   const [data, setdata] = useState([]);
   const [selectedBank, setSelectedBank] = useState(null);
   const [selectedCurrency, setselectedCurrency] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
 
   useEffect(() => {
     const getdata = async () => {
@@ -36,6 +37,7 @@ function App() {
           data={data}
           onSelectBank={setSelectedBank}
           onSelectCurrency={setselectedCurrency}
+          onSelectDate={setSelectedDate}
         />
       
         <div className="main">
@@ -43,6 +45,7 @@ function App() {
             data={data}
             selectedBank={selectedBank}
             Currency={selectedCurrency}
+            selectedDate={selectedDate}
           />
         </div>
       </div>

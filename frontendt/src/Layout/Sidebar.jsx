@@ -101,6 +101,15 @@ function Sidebar({ data, onSelectBank, onSelectCurrency, onSelectDate }) {
           </div>
 
           <div className="mobile-select">
+            <label htmlFor="date-select">Date</label>
+            <input type="date" id="date-select" value={selectedDate} onChange={e => {
+              const value = e.target.value || null;
+              setSelectedDate(value);
+              onSelectDate(value);
+            }} />
+          </div>  
+
+          <div className="mobile-select">
             <label htmlFor="bank-select">Bank</label>
             <select
               id="bank-select"

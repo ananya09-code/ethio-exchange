@@ -45,6 +45,13 @@ class date(BaseModel):
 # ROUTES
 # -----------------------------------
 
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
+
+
+
 @app.get("/rates/{date}")
 def get_all_rates(date:str):
     db = SessionLocal()

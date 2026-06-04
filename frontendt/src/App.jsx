@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const getdata = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/rates/${selectedDate}`);
         setdata(response.data);
       } catch (error) {
         console.log(error);

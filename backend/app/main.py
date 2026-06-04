@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from sqlalchemy import select, func
 from app.db.database import SessionLocal, engine, Base
 from app.db.model import Rate
+from datetime import datetime, timedelta
 
 
 
@@ -38,16 +39,23 @@ app.add_middleware(
 class Currency(BaseModel):
     code: str
 
+class date(BaseModel):
+    date:str
 # -----------------------------------
 # ROUTES
 # -----------------------------------
 
-@app.get("/")
-def get_all_rates():
+@app.get("/rates/{date}")
+def get_all_rates(date:str):
     db = SessionLocal()
    
     try:
-        data = db.query(Rate).all()
+        date_obj = datetime.strptime(date, "%Y-%m-%d")
+
+        data = db.query(Rate).filter(
+            Rate.created_at >= date_obj,
+            Rate.created_at < date_obj + timedelta(days=1)
+        ).all()
 
         result = []
 

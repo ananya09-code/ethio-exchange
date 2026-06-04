@@ -25,7 +25,7 @@ function App() {
     };
 
     getdata();
-  }, []);
+  }, [selectedDate]);
 
   return (
     <div className="app">

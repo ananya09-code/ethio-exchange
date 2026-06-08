@@ -26,8 +26,6 @@ header {
 .body {
   display: flex;
   flex: 1;
-  gap: 20px;
-  padding: 20px;
   background: #f5f7fb;
  
   

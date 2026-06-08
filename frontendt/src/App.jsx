@@ -5,19 +5,23 @@ import { useState, useEffect } from "react";
 
 import Header from "./Layout/Header";
 import Sidebar from "./Layout/Sidebar";
+import Mainbar from "./Layout/Mainbar";
 import Dashboard from "./Layout/Dashboard";
-
 
 function App() {
   const [data, setdata] = useState([]);
   const [selectedBank, setSelectedBank] = useState(null);
   const [selectedCurrency, setselectedCurrency] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
 
   useEffect(() => {
     const getdata = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/rates/${selectedDate}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/rates/${selectedDate}`
+        );
         setdata(response.data);
       } catch (error) {
         console.log(error);
@@ -32,14 +36,9 @@ function App() {
       <Header />
 
       <div className="body">
-    
-        <Sidebar
-          data={data}
-          onSelectBank={setSelectedBank}
-          onSelectCurrency={setselectedCurrency}
-          onSelectDate={setSelectedDate}
-        />
-      
+         <Mainbar />
+       
+
         <div className="main">
           <Dashboard
             data={data}

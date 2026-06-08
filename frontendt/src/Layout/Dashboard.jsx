@@ -2,21 +2,32 @@ import CurrencyTable from "../dashboard/Currencytable";
 import Calculator from "../dashboard/Calculator";
 import Popluar from "../dashboard/Popluar"
 
+import Currencybar from "../dashboard/Currencybar";
+
 import "../css/dashboard.css";
-function Dashboard({data,selectedBank,Currency,selectedDate}) {
+import { useState } from "react";
+function Dashboard({ data, selectedBank, selectedDate }) {
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
+
   return (
     <div className="dashboard">
-      <h1 className="dash"><i class="fa-solid fa-chart-column"></i> Dashboard</h1>
-       <Popluar selectedCurrency={Currency}/>
+      <Currencybar
+        sentdata={data}
+        setSelectedCurrency={setSelectedCurrency}
+      />
 
-       <div className="con-p">
-      <CurrencyTable data={data} selected={selectedBank} selectedCurrency={Currency} selectedDate={selectedDate}/>
-      <Calculator data={data} />
+      <Popluar selectedCurrency={selectedCurrency} />
+
+      <div className="con-p">
+        <CurrencyTable
+          data={data}
+          selected={selectedBank}
+          selectedCurrency={selectedCurrency}
+          selectedDate={selectedDate}
+        />
+
+        <Calculator data={data} />
       </div>
-      
-     
     </div>
   );
 }
-
-export default Dashboard;

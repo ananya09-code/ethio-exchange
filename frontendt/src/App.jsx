@@ -37,8 +37,7 @@ function App() {
 
       <div className="body">
          <Mainbar />
-       
-
+         
         <div className="main">
           <Dashboard
             data={data}

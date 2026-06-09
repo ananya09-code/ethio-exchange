@@ -1,7 +1,7 @@
 import CurrencyTable from "../dashboard/Currencytable";
 import Calculator from "../dashboard/Calculator";
 import Popluar from "../dashboard/Popluar"
-
+import CurrencyChart from "../dashboard/Currencychart";
 import Currencybar from "../dashboard/Currencybar";
 
 import "../css/dashboard.css";
@@ -16,7 +16,13 @@ function Dashboard({ data, selectedBank, selectedDate }) {
         setSelectedCurrency={setSelectedCurrency}
       />
 
+   
+
       <Popluar selectedCurrency={selectedCurrency} />
+
+        <CurrencyChart/>
+
+   
 
       <div className="con-p">
         <CurrencyTable
@@ -31,3 +37,6 @@ function Dashboard({ data, selectedBank, selectedDate }) {
     </div>
   );
 }
+
+
+export default Dashboard

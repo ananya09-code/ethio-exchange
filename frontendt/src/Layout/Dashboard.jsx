@@ -20,7 +20,7 @@ function Dashboard({ data, selectedBank, selectedDate }) {
 
       <Popluar selectedCurrency={selectedCurrency} />
 
-        <CurrencyChart/>
+        <CurrencyChart selectedcurrency={selectedCurrency}/>
 
    
 

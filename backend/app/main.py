@@ -144,6 +144,37 @@ def get_averages(code: str):
 
     finally:
         db.close()
+
+
+@app.get("/chart/{code}")
+def get_chart_data(code: str):
+    db = SessionLocal()
+
+    try:
+        result = db.execute(
+            select(
+                func.date(Rate.created_at).label("date"),
+                func.avg(Rate.buy).label("avg_buy"),
+                func.avg(Rate.sell).label("avg_sell")
+            )
+            .where(Rate.currency_code == code.upper())
+            .group_by(func.date(Rate.created_at))
+            .order_by(func.date(Rate.created_at))
+        ).all()
+
+        return [
+            {
+                "date": row.date,
+                "buy": round(row.avg_buy or 0, 2),
+                "sell": round(row.avg_sell or 0, 2)
+            }
+            for row in result
+        ]
+
+    finally:
+        db.close()
+
+
 #venv\Scripts\activate
 #uvicorn app.main:app --reload
 

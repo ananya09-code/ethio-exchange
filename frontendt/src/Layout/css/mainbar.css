@@ -112,7 +112,7 @@
 }
 
 /* MOBILE */
-@media (max-width: 800px) {
+@media (max-width: 700px) {
     .mainbar {
         width: 100%;
         min-height: 60px;

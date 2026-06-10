@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import birrlogo from "../assets/birrlogop.png";
-import "../css/header.css";
+import "./css/header.css";
 
 function Header() {
     const [date, setDate] = useState(new Date());

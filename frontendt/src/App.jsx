@@ -1,54 +1,27 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
 
-import axios from "axios";
-import { useState, useEffect } from "react";
+import Home from "../pages/Home";
+import Api from "../pages/Api";
 
-import Header from "./Layout/Header";
-import Sidebar from "./Layout/Sidebar";
-import Mainbar from "./Layout/Mainbar";
-import Dashboard from "./Layout/Dashboard";
-
-function App() {
-  const [data, setdata] = useState([]);
-  const [selectedBank, setSelectedBank] = useState(null);
-  const [selectedCurrency, setselectedCurrency] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
-
-  useEffect(() => {
-    const getdata = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/rates/${selectedDate}`
-        );
-        setdata(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getdata();
-  }, [selectedDate]);
+function App(){
 
   return (
-    <div className="app">
-      <Header />
+    <Routes>
 
-      <div className="body">
-         <Mainbar />
-         
-        <div className="main">
-          <Dashboard
-            data={data}
-            selectedBank={selectedBank}
-            Currency={selectedCurrency}
-            selectedDate={selectedDate}
-          />
-        </div>
-      </div>
-    </div>
-  );
+      <Route 
+        path="/" 
+        element={<Home />} 
+      />
+      
+      <Route 
+        path="/api" 
+        element={<Api />} 
+      />
+
+    </Routes>
+  )
 }
 
 export default App;
+  

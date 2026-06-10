@@ -1,4 +1,4 @@
-import "../css/currencytable.css";
+import "./css/currencytable.css";
 import codelogo from "./assets/flags";
 import cbe from "../assets/logo/CBE.png";
 import awash from "../assets/logo/awsah.webp";
@@ -24,7 +24,7 @@ import siinqee from "../assets/logo/Siinqee.png";
 import development from "../assets/logo/Development.png";
 import cooperative from "../assets/logo/Cooperative.png";
 
-
+import { useState } from "react";
 const logos = {
   cbe,
   awash,
@@ -54,6 +54,8 @@ const logos = {
 
 
 function CurrencyTable({ data, selected, selectedCurrency, selectedDate }) {
+  const [visibleRows, setVisibleRows] = useState(6)
+  const [showAll, setShowAll] = useState(false)
 
   const filteredData = data.filter((item) => {
     const bankMatch = selected
@@ -90,7 +92,7 @@ function CurrencyTable({ data, selected, selectedCurrency, selectedDate }) {
 
         <tbody>
           {filteredData.length > 0 ? (
-            filteredData.map((item, index) => (
+            filteredData.slice(0,visibleRows).map((item, index) => (
               <tr key={index}>
                 <td className="bank-cell" data-label="Bank Name">
                   <img
@@ -129,6 +131,11 @@ function CurrencyTable({ data, selected, selectedCurrency, selectedDate }) {
           )}
         </tbody>
       </table>
+      <div className="button-con" ><button  onClick={()=>{
+       setShowAll(prev => {
+       setVisibleRows(prev ? 6 : filteredData.length)
+       return !prev})
+      }}>{showAll?"SHOW LESS...":"SHOW MORE"}</button></div>
     </div>
   );
 }

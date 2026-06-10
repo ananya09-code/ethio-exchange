@@ -1,4 +1,4 @@
-import "../css/mainbar.css";
+import "./css/mainbar.css";
 import { useState } from "react";
 
 function Mainbar() {

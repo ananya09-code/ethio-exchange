@@ -31,7 +31,7 @@ function Footer() {
           <h3>Quick Links</h3>
 
           <a href="/">Home</a>
-          <a href="/rates">Rates</a>
+          <a href="/api">Rates</a>
           <a href="/banks">Banks</a>
           <a href="/about">About</a>
 

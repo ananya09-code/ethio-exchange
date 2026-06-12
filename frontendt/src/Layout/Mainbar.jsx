@@ -1,9 +1,12 @@
 import "./css/mainbar.css";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function Mainbar() {
     const [barstats, setBarstats] = useState(false);
     const [selected, setSelected] = useState("Dashboard");
+    const navigate = useNavigate();
+;
 
     return (
         <div className={`mainbar ${barstats ? "collapsed" : ""}`}>
@@ -25,7 +28,7 @@ function Mainbar() {
                 className={`main-page ${
                     selected === "Dashboard" ? "active" : ""
                 }`}
-                onClick={() => setSelected("Dashboard")}
+                onClick={() => {setSelected("Dashboard"); navigate('/'); }}
             >
                 <i className="fa-solid fa-house-user"></i>
                 <span>Dashboard</span>
@@ -36,7 +39,7 @@ function Mainbar() {
                 className={`main-page ${
                     selected === "Banks" ? "active" : ""
                 }`}
-                onClick={() => setSelected("Banks")}
+               onClick={() => { setSelected("Banks");  navigate('/banks'); }}
             >
                 <i className="fa-solid fa-building-columns"></i>
                 <span>Banks</span>
@@ -47,7 +50,7 @@ function Mainbar() {
                 className={`main-page ${
                     selected === "Analytics" ? "active" : ""
                 }`}
-                onClick={() => setSelected("Analytics")}
+                onClick={() => {setSelected("Analytics"); navigate('/'); }}
             >
                 <i className="fa-solid fa-chart-area"></i>
                 <span>Analytics</span>

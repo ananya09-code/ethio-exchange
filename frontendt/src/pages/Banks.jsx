@@ -4,9 +4,10 @@ import Mainbar from "../Layout/Mainbar"
 import Footer from "../Layout/Footer"
 import Bankcard from "../banks/Bankcard"
 import { useState } from "react"
+import "./css/bank.css"
+import Aboutcard from "../banks/Aboutcard"
 
-
-function Banks({data}){
+function Banks({data}) {
 
     const [selecteddate,setSelecteddate] = useState(
         new Date().toISOString().split("T")[0]
@@ -14,6 +15,9 @@ function Banks({data}){
 
     const [selectedcurrency,setSelectedcurrency] = useState("")
 
+
+    const [selectedBank,setSelectedBank] = useState(null)
+   
 
     return(
         <div className="app">
@@ -24,22 +28,47 @@ function Banks({data}){
 
                 <Mainbar />
 
-                <div className="main">
+                <div className={`main ${selectedBank ? "with-about" : "no-about"}`}>
 
-                    <Searchcard 
-                        data={data}
-                        onselectdate={setSelecteddate}
-                        onselectcurrency={setSelectedcurrency}
-                    />
+                    <div className="bank-con">
+
+                        <Searchcard 
+                            data={data}
+                            onselectdate={setSelecteddate}
+                            onselectcurrency={setSelectedcurrency}
+                        />
+
+                    </div>
+                        <Bankcard 
+                            data={data}
+                            selectedDate={selecteddate}
+                            selectedCurrency={selectedcurrency}
+                            onView={(bank)=>setSelectedBank(bank)}
+                        
+                        />
 
 
-                    <Bankcard 
-                        data={data}
-                        selectedDate={selecteddate}
-                        selectedCurrency={selectedcurrency}
-                    />
+
 
                 </div>
+
+
+                
+                    {
+                    selectedBank && (
+
+                        <div className="about">
+
+                            <Aboutcard 
+                                bank={selectedBank}
+                                data={data}
+                                buttonaction={setSelectedBank}
+                            />
+
+                        </div>
+
+                    )
+                    }
 
             </div>
 
@@ -48,5 +77,6 @@ function Banks({data}){
         </div>
     )
 }
+
 
 export default Banks

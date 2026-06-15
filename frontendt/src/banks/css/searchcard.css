@@ -134,3 +134,9 @@ select:focus,
         width: 100%;
     }
 }
+
+
+/* make search card full row */
+.search-con {
+    grid-column: 1 / -1;
+}

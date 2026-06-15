@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useMemo} from "react";
 import "./css/bankcard.css"
-
+import codelogo from "../dashboard/assets/flags";
 import cbe from "../assets/logo/CBE.png";
 import awash from "../assets/logo/awsah.webp";
 import dashen from "../assets/logo/Dashen.png";
@@ -24,6 +24,7 @@ import hijra from "../assets/logo/Hijra.png";
 import siinqee from "../assets/logo/Siinqee.png";
 import development from "../assets/logo/Development.png";
 import cooperative from "../assets/logo/Cooperative.png";
+import Chartcard from "./about/Chartcard";
 
 const logos = {
   cbe,
@@ -55,88 +56,32 @@ const logos = {
 
 
 
+function Bankcard({data,selectedDate,selectedCurrency,onView}){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function Bankcard({data,selectedDate,selectedCurrency}){
-
-    const [banklist,setBanklist] = useState([])
-
-
-    const filteredData = data.filter((item)=>{
-
+const filteredData = useMemo(() => {
+    return data.filter((item) => {
         const currencyMatch = selectedCurrency
             ? item.currency_code === selectedCurrency
-            : true
-
+            : true;
 
         const dateMatch = selectedDate
             ? item.created_at.startsWith(selectedDate)
-            : true
+            : true;
+
+        return currencyMatch && dateMatch;
+    });
+}, [data, selectedCurrency, selectedDate]);
 
 
-        return currencyMatch && dateMatch
 
-    })
+   const banklist = useMemo(() => {
+    const banks = [...new Set(filteredData.map(item => item.bank_name))];
 
-
-
-    useEffect(()=>{
-
-        const banks = [...new Set(
-            filteredData.map(item => item.bank_name)
-        )]
-
-
-        const newBankList = banks.map(bank=>{
-
-            return {
-                bank_name: bank,
-                data: filteredData.filter(item =>
-                    item.bank_name === bank
-                )
-            }
-
-        })
-
-
-        setBanklist(newBankList)
-
-
-    },[filteredData])
-
-
+    return banks.map(bank => ({
+        bank_name: bank,
+        data: filteredData.filter(item => item.bank_name === bank)
+    }));
+}, [filteredData]);
 
     return(
         <div className="bank-con">
@@ -178,15 +123,21 @@ function Bankcard({data,selectedDate,selectedCurrency}){
 
                             <tr key={item.id}>
 
-                                <td>
-                                    {item.currency_code}
+                                <td className="flag-con">
+                                     <img src={
+      codelogo?.[item.currency_code?.toLowerCase()]
+        ? `https://flagcdn.com/w40/${codelogo[item.currency_code.toLowerCase()]}.png`
+        : "https://flagcdn.com/w40/un.png"
+    }
+    alt="flag"
+  />  {item.currency_code}
                                 </td>
 
-                                <td>
+                                <td className="buy">
                                     {item.buy}
                                 </td>
 
-                                <td>
+                                <td className="sell">
                                     {item.sell}
                                 </td>
 
@@ -197,6 +148,15 @@ function Bankcard({data,selectedDate,selectedCurrency}){
                         </tbody>
 
                     </table>
+
+
+
+                 <div className="butt-co">
+
+                    <button className="viwe" onClick={()=>onView(bank)}>View More..</button>
+                    <button className="compere">compare Banks</button>
+                    <button className="link-bank">Vist Site</button>
+                 </div>
 
 
                 </div>

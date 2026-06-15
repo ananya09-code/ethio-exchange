@@ -185,6 +185,121 @@ td:first-child {
 
 
 
+.butt-co {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+
+/* base button */
+.butt-co button {
+
+    border: 1px solid #334155;
+    color: #15171a;
+
+    padding: 7px 12px;
+    border-radius: 6px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+
+    height: 32px;
+}
+
+
+/* view details */
+.viwe {
+    background-color: #2563eb;
+    color: #ffffff !important;
+}
+
+
+.viwe:hover {
+    background: #6895f5;
+    color: white !important;
+}
+
+
+
+/* compare */
+.compere {
+    background: transparent;
+    border-color: #2563eb !important;
+}
+
+
+.compere:hover {
+    background: #334155;
+    color: white;
+}
+
+
+
+/* visit site */
+.link-bank {
+    background: transparent;
+    border-color: #2563eb !important;
+}
+
+
+.link-bank:hover {
+    background: #1e293b;
+     color: white;
+}
+.buy{
+  color: rgb(0, 197, 0);
+}
+
+.sell{
+  color: red;
+}
+
+
+.flag-con img {
+  width: 20px;
+  height: 13px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* mobile */
+@media(max-width:600px){
+
+    .butt-co button{
+        flex:1;
+        font-size:10px;
+        padding:6px;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
 /* mobile */
 
 @media(max-width:700px){

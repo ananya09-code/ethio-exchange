@@ -1,47 +1,9 @@
-/* main content */
 .main {
-    gap: 20px;
-    padding: 20px;
-    background: #f5f7fb;
-    overflow-y: auto;
+    margin: 1%;
+    flex: 1;
 }
 
-
-/* when about is visible */
-.main.with-about {
-    grid-template-columns: minmax(600px, 1fr) 320px;
-}
-
-
-/* when about is hidden */
-.main.no-about {
-    grid-template-columns: 1fr;
-}
-
-
-
-.body {
-    display: flex;
-    flex-direction: row;
-    background: #f5f7fb;
-}
-
-
-
-
-
-
-/* mobile */
-@media(max-width:1000px){
-
-    .main.with-about,
-    .main.no-about {
-        grid-template-columns: 1fr;
-    }
-
-
-    .about {
-        position: static;
-    }
-
+.about {
+    margin: 1%;
+    flex-shrink: 0;
 }

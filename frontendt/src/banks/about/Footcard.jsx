@@ -1,11 +1,5 @@
 import "./css/footcard.css"
 
-
-
-
-
-
-
 function Footcard({bankdata}){
    return(
     <div className="foot-con">

@@ -25,31 +25,40 @@ function Currencybar({ sentdata, setSelectedCurrency}) {
         }
     }, [sentdata]);
 
-    return (
-        <div className="bar-con">
-            {ondata.slice(start, end).map(currency => (
-                <span
-                    key={currency}
-                    className={selected === currency ? "on" : "off"}
-            onClick={() => {setSelected(currency)
-                                   setSelectedCurrency(currency)
-            }
+return (
+   <div className="bar-con">
+
+    <div className="currency-scroll">
+        {ondata.slice(start, end).map(currency => (
+            <span
+                key={currency}
+                className={selected === currency ? "on" : "off"}
+                onClick={() => {
+                    setSelected(currency);
+                    setSelectedCurrency(currency);
+                }}
+            >
+                <img
+                    src={
+                        codelogo?.[currency?.toLowerCase()]
+                            ? `https://flagcdn.com/w40/${codelogo[currency.toLowerCase()]}.png`
+                            : "https://flagcdn.com/w40/un.png"
                     }
-                ><img src={
-      codelogo?.[currency?.toLowerCase()]
-        ? `https://flagcdn.com/w40/${codelogo[currency.toLowerCase()]}.png`
-        : "https://flagcdn.com/w40/un.png"
-    }
-    alt="flag"
-  /> 
-                     {currency}
-                </span>
-            ))}<button onClick={()=>{getsize()}}>
-                
-                
-                {start+5<ondata.length?<i className="fa-solid fa-angles-left"></i>:"less"}</button>
-        </div>
-    );
+                    alt="flag"
+                />
+                {currency}
+            </span>
+        ))}
+    </div>
+
+    <button onClick={getsize}>
+        {start + 5 < ondata.length
+            ? <i className="fa-solid fa-angles-right"></i>
+            : "less"}
+    </button>
+
+</div>
+);
 }
 
 export default Currencybar;

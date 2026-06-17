@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-
+import "./css/chartcard.css"
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -40,6 +40,7 @@ function Chartcard({ selectedcurrency}) {
 
   console.table(formattedData);
   return (
+    
     <div
       style={{
         width: "100%",
@@ -51,6 +52,7 @@ function Chartcard({ selectedcurrency}) {
         border: "1px solid #e5e7eb",
         display: "flex",
         flexDirection: "column",
+        
       }}
     >
       <h3
@@ -65,7 +67,7 @@ function Chartcard({ selectedcurrency}) {
         Rate History ({selectedcurrency})
       </h3>
 
-      <ResponsiveContainer width="100%" height="90%">
+     <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={formattedData}
           margin={{ top: 20, right: 30, left: 10, bottom: 20 }}

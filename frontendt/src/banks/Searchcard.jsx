@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import "./css/searchcard.css"
 
-function Searchcard({data,onselectdate,onselectcurrency}){
+function Searchcard({data,onselectdate,onselectcurrency,searcheditem}){
 
     const [currencylist,setCurrencylist]=useState([])
 
@@ -10,7 +10,8 @@ function Searchcard({data,onselectdate,onselectcurrency}){
     const [selectedDate,setSelectedDate]=useState(
         new Date().toISOString().split("T")[0]
     )
-
+   
+    
 
     useEffect(()=>{
 
@@ -49,6 +50,10 @@ function Searchcard({data,onselectdate,onselectcurrency}){
                         type="search"
                         className="search-input"
                         placeholder="Search..."
+                        onChange={(e)=>{
+                            searcheditem(e.target.value)
+                            
+                        }}
                     />
 
                 </div>

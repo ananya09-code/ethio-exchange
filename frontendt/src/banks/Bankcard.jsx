@@ -56,7 +56,7 @@ const logos = {
 
 
 
-function Bankcard({data,selectedDate,selectedCurrency,onView}){
+function Bankcard({data,selectedDate,selectedCurrency,onView,seacheditems}){
 
 const filteredData = useMemo(() => {
     return data.filter((item) => {
@@ -83,88 +83,67 @@ const filteredData = useMemo(() => {
     }));
 }, [filteredData]);
 
-    return(
-        <div className="bank-con">
+  return (
+  <div className="bank-con">
 
-            {banklist.map(bank=>(
+    {banklist
+      .filter(bank =>
+        bank.bank_name
+          .toLowerCase()
+          .includes(seacheditems?.toLowerCase() || "")
+      )
+      .map(bank => (
+        <div className="bank-card" key={bank.bank_name}>
 
-                <div className="bank-card" key={bank.bank_name}>
-                    <div className="head-con">
+          <div className="head-con">
+            <h3>{bank.bank_name}</h3>
 
-                    <h3>{bank.bank_name}</h3>
-                      <img
-                    src={logos[bank.bank_name.toLowerCase()] || cbe}
-                    alt={bank.bank_name}
-                    className="bank-logo"
-                  />
-                 
-                    
-                    
-                    
-                    </div>
+            <img
+              src={logos[bank.bank_name.toLowerCase()] || cbe}
+              alt={bank.bank_name}
+              className="bank-logo"
+            />
+          </div>
 
+          <table>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Buy</th>
+                <th>Sell</th>
+              </tr>
+            </thead>
 
+            <tbody>
+              {bank.data.slice(0, 3).map(item => (
+                <tr key={item.id}>
+                  <td className="flag-con">
+                    <img
+                      src={
+                        codelogo?.[item.currency_code?.toLowerCase()]
+                          ? `https://flagcdn.com/w40/${codelogo[item.currency_code.toLowerCase()]}.png`
+                          : "https://flagcdn.com/w40/un.png"
+                      }
+                      alt="flag"
+                    />
+                    {item.currency_code}
+                  </td>
 
+                  <td className="buy">{item.buy}</td>
+                  <td className="sell">{item.sell}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-                    <table>
-
-                        <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Buy</th>
-                                <th>Sell</th>
-                            </tr>
-                        </thead>
-
-
-                        <tbody>
-
-                        {bank.data.slice(0,3).map(item=>(
-
-                            <tr key={item.id}>
-
-                                <td className="flag-con">
-                                     <img src={
-      codelogo?.[item.currency_code?.toLowerCase()]
-        ? `https://flagcdn.com/w40/${codelogo[item.currency_code.toLowerCase()]}.png`
-        : "https://flagcdn.com/w40/un.png"
-    }
-    alt="flag"
-  />  {item.currency_code}
-                                </td>
-
-                                <td className="buy">
-                                    {item.buy}
-                                </td>
-
-                                <td className="sell">
-                                    {item.sell}
-                                </td>
-
-                            </tr>
-
-                        ))}
-
-                        </tbody>
-
-                    </table>
-
-
-
-                 <div className="butt-co">
-
-                    <button className="viwe" onClick={()=>onView(bank)}>View More..</button>
-                    <button className="compere">compare Banks</button>
-                    <button className="link-bank">Vist Site</button>
-                 </div>
-
-
-                </div>
-
-            ))}
+          <div className="butt-co">
+            <button onClick={() => onView(bank)}>View More..</button>
+            <button className="compere">compare Banks</button>
+            <button className="viwe">Vist Site</button>
+          </div>
 
         </div>
-    )
-}
-
-export default Bankcard;
+      ))}
+  </div>
+);}
+export default Bankcard

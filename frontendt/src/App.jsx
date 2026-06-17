@@ -20,7 +20,6 @@ function App(){
           `${import.meta.env.VITE_API_URL}/rates/${selectedDate}`
         );
         setdata(response.data);
-        console.log(data)
       } catch (error) {
         console.log(error);
       }
@@ -39,7 +38,7 @@ function App(){
       
       <Route 
         path="/banks" 
-        element={<Banks data={data}/>} 
+        element={<Banks data={data}  onDateChange={setSelectedDate}/>} 
       />
       
       <Route 

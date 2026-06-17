@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 function Mainbar() {
     const [barstats, setBarstats] = useState(false);
-    const [selected, setSelected] = useState("Dashboard");
+    const [selected, setSelected] = useState(() => {
+    return localStorage.getItem("selectedPage") || "Dashboard";
+});
     const navigate = useNavigate();
 ;
 
@@ -28,7 +30,11 @@ function Mainbar() {
                 className={`main-page ${
                     selected === "Dashboard" ? "active" : ""
                 }`}
-                onClick={() => {setSelected("Dashboard"); navigate('/'); }}
+                onClick={() => {
+    setSelected("Dashboard");
+    localStorage.setItem("selectedPage", "Dashboard");
+    navigate('/');
+}}
             >
                 <i className="fa-solid fa-house-user"></i>
                 <span>Dashboard</span>
@@ -39,7 +45,11 @@ function Mainbar() {
                 className={`main-page ${
                     selected === "Banks" ? "active" : ""
                 }`}
-               onClick={() => { setSelected("Banks");  navigate('/banks'); }}
+              onClick={() => {
+    setSelected("Banks");
+    localStorage.setItem("selectedPage", "Banks");
+    navigate('/banks');
+}}
             >
                 <i className="fa-solid fa-building-columns"></i>
                 <span>Banks</span>

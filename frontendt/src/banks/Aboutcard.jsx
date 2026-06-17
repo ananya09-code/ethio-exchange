@@ -26,7 +26,7 @@ function Aboutcard({ bank,buttonaction}) {
 
   return (
     <div className="about-card">
-      <button onClick={()=>{
+      <button className="butt-off" onClick={()=>{
         buttonaction(null)
       }}>      <i
                         className={`fa-solid ${

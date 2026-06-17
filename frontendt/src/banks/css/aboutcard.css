@@ -52,27 +52,6 @@
     transition: all 0.25s ease;
 }
 
-.about-card > button:hover {
-    background: #2563eb;
-    color: white;
-    transform: scale(1.1);
-}
-
-
-/* CHILD CARDS (Header, Table, Chart, Foot) */
-.about-card > *:not(button) {
-    width: 100%;
-
-    background: white;
-
-    border-radius: 18px;
-
-    padding: 20px;
-
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-
-    transition: all 0.25s ease;
-}
 
 
 /* hover effect */
@@ -82,19 +61,6 @@
 }
 
 
-/* RESPONSIVE */
-@media (max-width: 700px) {
-    .about-card {
-        width: 100%;
-        padding: 15px;
-        border-radius: 18px;
-    }
-
-    .about-card > button {
-        top: -14px;
-        right: 14px;
-    }
-}
 
 
 /* ANIMATION */
@@ -106,5 +72,50 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+    
+}
+
+
+@media (max-width: 700px) {
+
+    .about-card {
+        width: 100vw;
+        padding: 16px;
+
+        border-radius: 16px;
+        gap: 16px;
+
+        margin-top: 20px;
+
+        line-height: 1.5;
+
+        position: relative; /* IMPORTANT for floating button */
+    }
+
+    /* Floating button */
+    .about-card > button {
+        position: absolute; /* FIX missing positioning */
+
+        top: -12px;
+        right: 12px;
+
+        width: 38px;
+        height: 38px;
+
+        font-size: 14px;
+
+        box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    }
+
+    /* disable hover effects on mobile */
+    .about-card > *:not(button):hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* hide unwanted button */
+    .butt-off {
+        display: none !important;
     }
 }

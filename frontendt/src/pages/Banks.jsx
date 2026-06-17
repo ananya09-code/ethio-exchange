@@ -7,18 +7,20 @@ import { useState } from "react"
 import "./css/bank.css"
 import Aboutcard from "../banks/Aboutcard"
 
-function Banks({data}) {
+function Banks({data, onDateChange}) {
 
     const [selecteddate,setSelecteddate] = useState(
         new Date().toISOString().split("T")[0]
     )
 
     const [selectedcurrency,setSelectedcurrency] = useState("")
-
+    const [seacheditems,setseacheditem]=useState(null)
 
     const [selectedBank,setSelectedBank] = useState(null)
-   
-
+    const handleDateChange = (date) => {
+  setSelecteddate(date);     // local
+  onDateChange(date);        // send outside
+};
     return(
         <div className="app">
 
@@ -34,8 +36,9 @@ function Banks({data}) {
 
                         <Searchcard 
                             data={data}
-                            onselectdate={setSelecteddate}
+                            onselectdate={handleDateChange}
                             onselectcurrency={setSelectedcurrency}
+                            searcheditem={setseacheditem}
                         />
 
                     </div>
@@ -44,13 +47,15 @@ function Banks({data}) {
                             selectedDate={selecteddate}
                             selectedCurrency={selectedcurrency}
                             onView={(bank)=>setSelectedBank(bank)}
+                            seacheditems={seacheditems}
                         
-                        />
+                        /></div>
 
 
 
 
-                </div>
+
+               
 
 
                 
@@ -68,8 +73,7 @@ function Banks({data}) {
                         </div>
 
                     )
-                    }
-
+                    } 
             </div>
 
             <Footer/>

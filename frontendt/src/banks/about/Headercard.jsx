@@ -1,18 +1,17 @@
 import cbe from "../../assets/logo/CBE.png";
 import "./css/headercard.css"
-  function Headercard({bankdata}){
+import { logos } from "../../lib/banklogo";
+  function Headercard({bankdata,selectedbank}){
+    console.log(selectedbank)
     return(
      <div className="headcard-con">
 
       <div className="upper">
 
         <div className="logo-box">
-          <img src={cbe} alt={bankdata?.name} />
+          <img   src={logos[selectedbank.bank_name.toLowerCase()] || cbe} alt={bankdata?.name} />
         </div>
           <h1>{bankdata?.name}</h1>
-
-
-
         </div>
 
         <div className="lower">

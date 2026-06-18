@@ -81,26 +81,15 @@
 
 
 
-/* logo */
-
 .bank-logo {
-
-    width: 45px;
-
-    height: 45px;
-
-    object-fit: contain;
-
-    padding: 6px;
-
-    border-radius: 12px;
-
-    background: white;
-
-    box-shadow:
-        0 4px 12px rgba(0,0,0,0.08);
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background: #f1f1f1;
+  padding: 10px;
 }
-
 
 
 

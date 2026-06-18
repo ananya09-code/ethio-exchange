@@ -1,5 +1,5 @@
 import "./css/tablecard.css";
-import codelogo from "../lib/flags.js"
+import codelogo from "../../lib/flags.js"
 import { useState } from "react";
 function Tablecard({ bankdata,SelectedCurrency}) {
   const [choosen,setchoosen]=useState("USD")

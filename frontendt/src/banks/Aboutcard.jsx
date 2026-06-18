@@ -1,5 +1,5 @@
 import "./css/aboutcard.css";
-import { bankinfo } from "./lib/bankinfo";
+import { bankinfo } from "../lib/bankinfo";
 import { useState,useEffect } from "react";
 import Headercard from "./about/Headercard";
 const banksArray = Object.values(bankinfo);
@@ -35,7 +35,7 @@ function Aboutcard({ bank,buttonaction}) {
                                 : "fa-angles-left"
                         }`}
                     ></i></button>
-      <Headercard bankdata={bankselected} />
+      <Headercard bankdata={bankselected} selectedbank={bank} />
       <Tablecard  bankdata={bank} SelectedCurrency={setselectedcode} />
       <Chartcard  selectedcurrency={selectedcode} ></Chartcard>
       <Footcard bankdata={bankselected}/>

@@ -275,7 +275,7 @@ td:first-child {
         border-radius: 14px;
         flex-shrink: 0;
         scroll-snap-align: start;
-        max-height: 500px;
+        max-height: 550px;
     }
 
 
@@ -313,15 +313,16 @@ td:first-child {
     }
 
 
-    .butt-co{
-        gap: 5px;
-        margin-top: 8px;
-    }
-
+.butt-co {
+    display: flex;
+    gap: 6px;
+    margin-top: auto; /* 🔥 THIS is the key fix */
+}
 
     .butt-co button{
-        height: 22px;
+        height: 28px;
         font-size: 8px;
         padding: 3px;
+      
     }
 }

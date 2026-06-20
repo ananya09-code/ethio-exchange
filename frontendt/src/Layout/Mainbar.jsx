@@ -55,23 +55,15 @@ function Mainbar() {
                 <span>Banks</span>
             </div>
 
-            {/* ANALYTICS */}
-            <div
-                className={`main-page ${
-                    selected === "Analytics" ? "active" : ""
-                }`}
-                onClick={() => {setSelected("Analytics"); navigate('/'); }}
-            >
-                <i className="fa-solid fa-chart-area"></i>
-                <span>Analytics</span>
-            </div>
-
             {/* API */}
             <div
                 className={`main-page ${
                     selected === "API" ? "active" : ""
                 }`}
-                onClick={() => setSelected("API")}
+                onClick={() =>{setSelected("API")
+                     localStorage.setItem("selectedPage", "Api");
+                      navigate('/Api');
+                }}
             >
                 <i className="fa-solid fa-tower-cell"></i>
                 <span>API</span>

@@ -1,5 +1,5 @@
 import "./css/currencytable.css";
-import codelogo from "./assets/flags";
+import codelogo from "../lib/flags"
 import cbe from "../assets/logo/CBE.png";
 import { logos } from "../lib/banklogo";
 

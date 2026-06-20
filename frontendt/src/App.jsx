@@ -43,7 +43,7 @@ function App(){
       
       <Route 
         path="/api" 
-        element={<Api />} 
+        element={<Api/>} 
       />
 
     </Routes>

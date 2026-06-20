@@ -1,6 +1,6 @@
 import { useState, useEffect,useMemo} from "react";
 import "./css/bankcard.css"
-import codelogo from "../dashboard/assets/flags";
+import codelogo from "../lib/flags"
 import cbe from "../assets/logo/CBE.png";
 import { logos } from "../lib/banklogo";
 

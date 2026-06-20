@@ -1,6 +1,6 @@
 import "./css/currencybar.css";
 import { useState, useEffect } from "react";
-import codelogo from "./assets/flags";
+import codelogo from "../lib/flags"
 function Currencybar({ sentdata, setSelectedCurrency}) {
     const [selected, setSelected] = useState("");
     const [ondata, setondata] = useState([]);

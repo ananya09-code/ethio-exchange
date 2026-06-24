@@ -1,59 +1,14 @@
-import "../css/currencytable.css";
-import codelogo from "./assets/flags";
+import "./css/currencytable.css";
+import codelogo from "../lib/flags"
 import cbe from "../assets/logo/CBE.png";
-import awash from "../assets/logo/awsah.webp";
-import dashen from "../assets/logo/Dashen.png";
-import nib from "../assets/logo/nib.webp";
-import abyssinia from "../assets/logo/abyssinia.webp";
-import abay from "../assets/logo/abay.webp";
-import hibret from "../assets/logo/hibret.svg";
-import berhan from "../assets/logo/Berhan.png";
-import addis from "../assets/logo/Addis.png";
-import wegagen from "../assets/logo/Wegagen.png";
-import zemen from "../assets/logo/Zemen.png";
-import bunna from "../assets/logo/Bunna.png";
-import amhara from "../assets/logo/Amhara.png";
-import oromia from "../assets/logo/Oromia.png";
-import ahadu from "../assets/logo/Ahadu.svg";
-import gadaa from "../assets/logo/Gadaa.png";
-import enat from "../assets/logo/Enat.png";
-import global from "../assets/logo/Global.svg";
-import rammis from "../assets/logo/Rammis.png";
-import hijra from "../assets/logo/Hijra.png";
-import siinqee from "../assets/logo/Siinqee.png";
-import development from "../assets/logo/Development.png";
-import cooperative from "../assets/logo/Cooperative.png";
+import { logos } from "../lib/banklogo";
 
-
-const logos = {
-  cbe,
-  awash,
-  dashen,
-  nib,
-  abyssinia,
-  abay,
-  hibret,
-  berhan,
-  addis,
-  wegagen,
-  zemen,
-  bunna,
-  amhara,
-  oromia,
-  ahadu,
-  gadaa,
-  enat,
-  global,
-  rammis,
-  hijra,
-  siinqee,
-  development,
-  cooperative,
-
-};
+import { useState } from "react";
 
 
 function CurrencyTable({ data, selected, selectedCurrency, selectedDate }) {
+  const [visibleRows, setVisibleRows] = useState(6)
+  const [showAll, setShowAll] = useState(false)
 
   const filteredData = data.filter((item) => {
     const bankMatch = selected
@@ -90,7 +45,7 @@ function CurrencyTable({ data, selected, selectedCurrency, selectedDate }) {
 
         <tbody>
           {filteredData.length > 0 ? (
-            filteredData.map((item, index) => (
+            filteredData.slice(0,visibleRows).map((item, index) => (
               <tr key={index}>
                 <td className="bank-cell" data-label="Bank Name">
                   <img
@@ -129,6 +84,11 @@ function CurrencyTable({ data, selected, selectedCurrency, selectedDate }) {
           )}
         </tbody>
       </table>
+      <div className="button-con" ><button  onClick={()=>{
+       setShowAll(prev => {
+       setVisibleRows(prev ? 6 : filteredData.length)
+       return !prev})
+      }}>{showAll?"SHOW LESS...":"SHOW MORE"}</button></div>
     </div>
   );
 }

@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background: #114eb0;
+    background: #013294;
     color: white;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .header {
-    background: rgba(17, 78, 176, 0.95);
+    background: #013294;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }

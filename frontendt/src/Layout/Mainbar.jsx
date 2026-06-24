@@ -1,55 +1,50 @@
 import "./css/mainbar.css";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Mainbar() {
     const [barstats, setBarstats] = useState(false);
-    const [selected, setSelected] = useState(() => {
-    return localStorage.getItem("selectedPage") || "Dashboard";
-});
     const navigate = useNavigate();
-;
+    const location = useLocation();
+
+    const getActive = (path) => location.pathname === path;
 
     return (
         <div className={`mainbar ${barstats ? "collapsed" : ""}`}>
-            {/* TOGGLE BUTTON */}
+            
+            {/* TOGGLE */}
             <div className="but-con">
                 <button onClick={() => setBarstats(!barstats)}>
                     <i
                         className={`fa-solid ${
-                            barstats
-                                ? "fa-angles-right"
-                                : "fa-angles-left"
+                            barstats ? "fa-angles-right" : "fa-angles-left"
                         }`}
                     ></i>
                 </button>
             </div>
 
-            {/* DASHBOARD */}
+            {/* HOME */}
             <div
-                className={`main-page ${
-                    selected === "Dashboard" ? "active" : ""
-                }`}
-                onClick={() => {
-    setSelected("Dashboard");
-    localStorage.setItem("selectedPage", "Dashboard");
-    navigate('/');
-}}
+                className={`main-page ${getActive("/") ? "active" : ""}`}
+                onClick={() => navigate("/")}
             >
                 <i className="fa-solid fa-house-user"></i>
+                <span>Home</span>
+            </div>
+
+            {/* DASHBOARD */}
+            <div
+                className={`main-page ${getActive("/dashboard") ? "active" : ""}`}
+                onClick={() => navigate("/dashboard")}
+            >
+                <i className="fa-solid fa-chart-column"></i>
                 <span>Dashboard</span>
             </div>
 
             {/* BANKS */}
             <div
-                className={`main-page ${
-                    selected === "Banks" ? "active" : ""
-                }`}
-              onClick={() => {
-    setSelected("Banks");
-    localStorage.setItem("selectedPage", "Banks");
-    navigate('/banks');
-}}
+                className={`main-page ${getActive("/banks") ? "active" : ""}`}
+                onClick={() => navigate("/banks")}
             >
                 <i className="fa-solid fa-building-columns"></i>
                 <span>Banks</span>
@@ -57,28 +52,13 @@ function Mainbar() {
 
             {/* API */}
             <div
-                className={`main-page ${
-                    selected === "API" ? "active" : ""
-                }`}
-                onClick={() =>{setSelected("API")
-                     localStorage.setItem("selectedPage", "Api");
-                      navigate('/Api');
-                }}
+                className={`main-page ${getActive("/api") ? "active" : ""}`}
+                onClick={() => navigate("/api")}
             >
                 <i className="fa-solid fa-tower-cell"></i>
                 <span>API</span>
             </div>
 
-            {/* SETTINGS */}
-            <div
-                className={`main-page ${
-                    selected === "Settings" ? "active" : ""
-                }`}
-                onClick={() => setSelected("Settings")}
-            >
-                <i className="fa-solid fa-gear"></i>
-                <span>Settings</span>
-            </div>
         </div>
     );
 }

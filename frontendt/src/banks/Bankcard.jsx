@@ -77,6 +77,8 @@ const filteredData = useMemo(() => {
                       }
                       alt="flag"
                     />
+
+                    
                     {item.currency_code}
                   </td>
 
@@ -88,7 +90,7 @@ const filteredData = useMemo(() => {
           </table>
 
           <div className="butt-co">
-            <button onClick={() => onView(bank)}>View More..</button>
+            <button className="viwemore" onClick={() => onView(bank)}>View More..</button>
             <button className="compere">compare Banks</button>
             <button className="viwe">Vist Site</button>
           </div>

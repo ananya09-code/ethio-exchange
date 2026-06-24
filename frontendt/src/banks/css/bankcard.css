@@ -146,9 +146,11 @@ td {
 
     border-bottom: 1px solid #f1f5f9;
 }
-
-
-
+.flag-con {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 tbody tr {
 
@@ -199,7 +201,15 @@ td:first-child {
     height: 32px;
 }
 
+.viwemore{
+     background: #3877ff;
+}
 
+
+.viwemore:hover{
+        background: #b7ceff;
+    color: white !important;
+}
 /* view details */
 .viwe {
     background: transparent;

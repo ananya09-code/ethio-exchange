@@ -15,7 +15,7 @@
   flex: 1;
 }
 
-fieldset {
+.form-con fieldset {
   border: none;
   display: flex;
   flex-direction: column;
@@ -23,20 +23,20 @@ fieldset {
   padding: 0;
 }
 
-legend {
+.form-con legend {
   font-size: 1.3rem;
   font-weight: 700;
   color: #111827;
   margin-bottom: 6px;
 }
 
-label {
+.form-con label {
   font-size: 0.85rem;
   font-weight: 600;
   color: #374151;
 }
 
-select,
+.form-con select,
 input {
   width: 100%;
   padding: 11px 14px;
@@ -48,13 +48,13 @@ input {
   outline: none;
 }
 
-select:focus,
+.form-con select:focus,
 input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
-button {
+.form-con button {
   margin-top: 8px;
   padding: 11px;
   border: none;
@@ -67,7 +67,7 @@ button {
   transition: 0.2s ease;
 }
 
-button:hover {
+.form-con button:hover {
   background: #1d4ed8;
   transform: translateY(-1px);
 }

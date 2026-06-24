@@ -4,6 +4,7 @@ import { Routes, Route, data } from "react-router-dom";
 import Home from "./pages/Home";
 import Api from "./pages/Api";
 import Banks from "./pages/Banks";
+import About from "./pages/About";
 import { useState,useEffect } from "react"
 
 import axios from "axios";
@@ -33,6 +34,11 @@ function App(){
 
       <Route 
         path="/" 
+        element={<About/>} 
+      />
+
+      <Route 
+        path="/dashboard" 
         element={<Home data={data} />} 
       />
       
@@ -45,6 +51,7 @@ function App(){
         path="/api" 
         element={<Api/>} 
       />
+     
 
     </Routes>
   )

@@ -1,6 +1,3 @@
-For Birrify, your README should look like a real developer project. You can copy this:
-
-```md
 # 🇪🇹 Birrify
 
 A full-stack exchange rate platform that makes it easier to compare Ethiopian bank currency rates in one place.
@@ -82,7 +79,6 @@ More banks are being added.
 ## 📂 Project Structure
 
 ```
-
 Birrify/
 
 ├── frontend/
@@ -96,8 +92,7 @@ Birrify/
 │   ├── models/
 │   ├── routes/
 │   └── database/
-
-````
+```
 
 ---
 
@@ -107,7 +102,7 @@ Birrify/
 
 ```bash
 git clone https://github.com/ananya09-code/ethio-exchange.git
-````
+```
 
 ---
 
@@ -171,11 +166,13 @@ uvicorn app.main:app --reload
 
 ## 🔌 API Endpoints
 
-### Get all rates
+### Get all exchange rates
 
 ```
 GET /
 ```
+
+---
 
 ### Get highest and lowest rate
 
@@ -186,8 +183,10 @@ GET /high-low/{currency}
 Example:
 
 ```
-/high-low/USD
+GET /high-low/USD
 ```
+
+---
 
 ### Get average rate
 
@@ -198,25 +197,19 @@ GET /average/{currency}
 Example:
 
 ```
-/average/USD
+GET /average/USD
 ```
-
----
-
-## 📸 Screenshots
-
-(Add screenshots here)
 
 ---
 
 ## 🔮 Future Improvements
 
-* Add more banks
-* Add more currencies
-* Add charts for exchange rate history
-* Add authentication
-* Add developer API keys
-* Improve analytics
+- Add more Ethiopian banks
+- Add more currencies
+- Add exchange rate history charts
+- Add authentication
+- Add developer API keys
+- Improve analytics
 
 ---
 
@@ -224,15 +217,10 @@ Example:
 
 Built by Ananya
 
-Frontend-focused Full Stack Developer
+Frontend-Focused Full Stack Developer
 
 ---
 
 ## ⭐ Feedback
 
 Suggestions and improvements are welcome!
-
-```
-
-This README will make Birrify look like a **real portfolio project**, not just a school project. It also matches your LinkedIn posts and internship goal.
-```

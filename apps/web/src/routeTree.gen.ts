@@ -10,12 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BanksRouteImport } from './routes/banks'
 import { Route as CompareRouteImport } from './routes/compare'
+import { Route as ConverterRouteImport } from './routes/converter'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as BanksIndexRouteImport } from './routes/banks/index'
+import { Route as BanksBankIdRouteImport } from './routes/banks/$bankId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BanksRoute = BanksRouteImport.update({
+  id: '/banks',
+  path: '/banks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompareRoute = CompareRouteImport.update({
@@ -23,40 +33,101 @@ const CompareRoute = CompareRouteImport.update({
   path: '/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConverterRoute = ConverterRouteImport.update({
+  id: '/converter',
+  path: '/converter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BanksIndexRoute = BanksIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BanksRoute,
+} as any)
+const BanksBankIdRoute = BanksBankIdRouteImport.update({
+  id: '/$bankId',
+  path: '/$bankId',
+  getParentRoute: () => BanksRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/banks': typeof BanksRouteWithChildren
   '/compare': typeof CompareRoute
+  '/converter': typeof ConverterRoute
   '/dashboard': typeof DashboardRoute
+  '/history': typeof HistoryRoute
+  '/banks/$bankId': typeof BanksBankIdRoute
+  '/banks/': typeof BanksIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
+  '/converter': typeof ConverterRoute
   '/dashboard': typeof DashboardRoute
+  '/history': typeof HistoryRoute
+  '/banks/$bankId': typeof BanksBankIdRoute
+  '/banks': typeof BanksIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/banks': typeof BanksRouteWithChildren
   '/compare': typeof CompareRoute
+  '/converter': typeof ConverterRoute
   '/dashboard': typeof DashboardRoute
+  '/history': typeof HistoryRoute
+  '/banks/$bankId': typeof BanksBankIdRoute
+  '/banks/': typeof BanksIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/compare' | '/dashboard'
+  fullPaths:
+    | '/'
+    | '/banks'
+    | '/compare'
+    | '/converter'
+    | '/dashboard'
+    | '/history'
+    | '/banks/$bankId'
+    | '/banks/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/compare' | '/dashboard'
-  id: '__root__' | '/' | '/compare' | '/dashboard'
+  to:
+    | '/'
+    | '/compare'
+    | '/converter'
+    | '/dashboard'
+    | '/history'
+    | '/banks/$bankId'
+    | '/banks'
+  id:
+    | '__root__'
+    | '/'
+    | '/banks'
+    | '/compare'
+    | '/converter'
+    | '/dashboard'
+    | '/history'
+    | '/banks/$bankId'
+    | '/banks/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BanksRoute: typeof BanksRouteWithChildren
   CompareRoute: typeof CompareRoute
+  ConverterRoute: typeof ConverterRoute
   DashboardRoute: typeof DashboardRoute
+  HistoryRoute: typeof HistoryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,11 +139,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/banks': {
+      id: '/banks'
+      path: '/banks'
+      fullPath: '/banks'
+      preLoaderRoute: typeof BanksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/compare': {
       id: '/compare'
       path: '/compare'
       fullPath: '/compare'
       preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/converter': {
+      id: '/converter'
+      path: '/converter'
+      fullPath: '/converter'
+      preLoaderRoute: typeof ConverterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -82,13 +167,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/banks/': {
+      id: '/banks/'
+      path: '/'
+      fullPath: '/banks/'
+      preLoaderRoute: typeof BanksIndexRouteImport
+      parentRoute: typeof BanksRoute
+    }
+    '/banks/$bankId': {
+      id: '/banks/$bankId'
+      path: '/$bankId'
+      fullPath: '/banks/$bankId'
+      preLoaderRoute: typeof BanksBankIdRouteImport
+      parentRoute: typeof BanksRoute
+    }
   }
 }
 
+interface BanksRouteChildren {
+  BanksBankIdRoute: typeof BanksBankIdRoute
+  BanksIndexRoute: typeof BanksIndexRoute
+}
+
+const BanksRouteChildren: BanksRouteChildren = {
+  BanksBankIdRoute: BanksBankIdRoute,
+  BanksIndexRoute: BanksIndexRoute,
+}
+
+const BanksRouteWithChildren = BanksRoute._addFileChildren(BanksRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BanksRoute: BanksRouteWithChildren,
   CompareRoute: CompareRoute,
+  ConverterRoute: ConverterRoute,
   DashboardRoute: DashboardRoute,
+  HistoryRoute: HistoryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

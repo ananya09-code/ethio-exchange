@@ -3,7 +3,7 @@ import {
   Bell,
   BookOpen,
   ChartNoAxesCombined,
-  Coins,
+  CalendarDays,
   Database,
   Info,
   KeyRound,
@@ -47,9 +47,9 @@ const navigation = [
     section: "main",
   },
   {
-    label: "Currencies",
-    icon: Coins,
-    href: "/currencies",
+    label: "history",
+    icon: CalendarDays,
+    href: "/history",
     section: "main",
   },
   {

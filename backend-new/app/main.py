@@ -1,19 +1,14 @@
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from app.api.routes import market
 from app.api.routes import rates
-
+from app.api.routes import history
 
 app = FastAPI(
     title="Birrify API",
     version="1.0.0",
 )
 
-
-# -----------------------------------
-# CORS
-# -----------------------------------
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,17 +19,11 @@ app.add_middleware(
 )
 
 
-# -----------------------------------
-# ROUTES
-# -----------------------------------
-
 app.include_router(rates.router)
-
-
-# -----------------------------------
-# HEALTH CHECK
-# -----------------------------------
-
+app.include_router(history.router)
+app.include_router(market.router)
 @app.get("/health")
-def health_check():
-    return {"status": "normal"}
+def health():
+    return {
+        "status": "ok",
+    }

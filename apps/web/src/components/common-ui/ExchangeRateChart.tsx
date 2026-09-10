@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import {
   CartesianGrid,
   Line,
@@ -18,17 +18,11 @@ import {
 } from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
+import { useHistory } from "@/hooks/use-history";
 
 type Currency = "USD" | "EUR" | "GBP";
 type RateType = "buy" | "sell" | "average";
 type Period = "7D" | "30D" | "90D" | "1Y";
-
-type RatePoint = {
-  date: string;
-  buy: number;
-  sell: number;
-  average: number;
-};
 
 const currencies: Currency[] = ["USD", "EUR", "GBP"];
 
@@ -40,57 +34,47 @@ const rateLabels: Record<RateType, string> = {
   average: "Average",
 };
 
-/*
- * Temporary data.
- *
- * Replace this with data from your backend later.
- */
-const chartData: Record<Currency, RatePoint[]> = {
-  USD: [
-    { date: "Sep 4", buy: 144.2, sell: 145.8, average: 145.0 },
-    { date: "Sep 5", buy: 144.5, sell: 146.0, average: 145.25 },
-    { date: "Sep 6", buy: 144.7, sell: 146.1, average: 145.4 },
-    { date: "Sep 7", buy: 144.8, sell: 146.2, average: 145.5 },
-    { date: "Sep 8", buy: 145.0, sell: 146.4, average: 145.7 },
-    { date: "Sep 9", buy: 145.2, sell: 146.5, average: 145.85 },
-    { date: "Sep 10", buy: 145.4, sell: 146.7, average: 146.05 },
-  ],
-
-  EUR: [
-    { date: "Sep 4", buy: 168.2, sell: 170.0, average: 169.1 },
-    { date: "Sep 5", buy: 168.5, sell: 170.3, average: 169.4 },
-    { date: "Sep 6", buy: 168.8, sell: 170.5, average: 169.65 },
-    { date: "Sep 7", buy: 169.0, sell: 170.8, average: 169.9 },
-    { date: "Sep 8", buy: 169.3, sell: 171.0, average: 170.15 },
-    { date: "Sep 9", buy: 169.5, sell: 171.2, average: 170.35 },
-    { date: "Sep 10", buy: 169.7, sell: 171.4, average: 170.55 },
-  ],
-
-  GBP: [
-    { date: "Sep 4", buy: 194.2, sell: 196.0, average: 195.1 },
-    { date: "Sep 5", buy: 194.5, sell: 196.3, average: 195.4 },
-    { date: "Sep 6", buy: 194.8, sell: 196.5, average: 195.65 },
-    { date: "Sep 7", buy: 195.0, sell: 196.8, average: 195.9 },
-    { date: "Sep 8", buy: 195.2, sell: 197.0, average: 196.1 },
-    { date: "Sep 9", buy: 195.5, sell: 197.2, average: 196.35 },
-    { date: "Sep 10", buy: 195.8, sell: 197.5, average: 196.65 },
-  ],
-};
-
 export default function ExchangeRateChart() {
   const [currency, setCurrency] = useState<Currency>("USD");
   const [rateType, setRateType] = useState<RateType>("average");
   const [period, setPeriod] = useState<Period>("7D");
 
-  const data = useMemo(() => {
-    return chartData[currency];
-  }, [currency]);
+  const { data, isLoading, isError } = useHistory({
+    currency,
+    period,
+  });
 
-  const currentRate = data[data.length - 1]?.[rateType] ?? 0;
-  const previousRate = data[data.length - 2]?.[rateType] ?? currentRate;
+  const chartData = data?.history ?? [];
 
-  const change = currentRate - previousRate;
-  const changePercent = previousRate === 0 ? 0 : (change / previousRate) * 100;
+  const currentRate = data?.summary[rateType].value ?? 0;
+
+  const change = data?.summary[rateType].change ?? 0;
+
+  const changePercent = data?.summary[rateType].change_percent ?? 0;
+
+  if (isLoading) {
+    return (
+      <Card className="h-full">
+        <CardContent className="flex h-[430px] items-center justify-center">
+          <p className="text-sm text-muted-foreground">
+            Loading exchange rate history...
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Card className="h-full">
+        <CardContent className="flex h-[430px] items-center justify-center">
+          <p className="text-sm text-destructive">
+            Failed to load exchange rate history.
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="h-full">
@@ -121,7 +105,7 @@ export default function ExchangeRateChart() {
         </div>
 
         {/* Rate + change */}
-        <div className="flex items-end justify-between">
+        <div className="flex items-end justify-between gap-4">
           <div>
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-semibold tracking-tight">
@@ -160,59 +144,67 @@ export default function ExchangeRateChart() {
 
       <CardContent>
         <div className="h-[300px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              data={data}
-              margin={{
-                top: 10,
-                right: 10,
-                left: 0,
-                bottom: 0,
-              }}
-            >
-              <CartesianGrid vertical={false} className="stroke-muted" />
-
-              <XAxis
-                dataKey="date"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={10}
-                className="text-xs"
-              />
-
-              <YAxis
-                domain={["auto", "auto"]}
-                tickLine={false}
-                axisLine={false}
-                tickMargin={10}
-                width={45}
-                tickFormatter={(value: any) => Number(value).toFixed(0)}
-                className="text-xs"
-              />
-
-              <Tooltip
-                contentStyle={{
-                  borderRadius: "10px",
-                  border: "1px solid hsl(var(--border))",
-                  background: "hsl(var(--background))",
+          {chartData.length === 0 ? (
+            <div className="flex h-full items-center justify-center">
+              <p className="text-sm text-muted-foreground">
+                No rate history available for this period.
+              </p>
+            </div>
+          ) : (
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                data={chartData}
+                margin={{
+                  top: 10,
+                  right: 10,
+                  left: 0,
+                  bottom: 0,
                 }}
-                formatter={(value: any) => [
-                  `${Number(value).toFixed(2)} ETB`,
-                  rateLabels[rateType],
-                ]}
-              />
+              >
+                <CartesianGrid vertical={false} className="stroke-muted" />
 
-              <Line
-                type="monotone"
-                dataKey={rateType}
-                stroke="currentColor"
-                strokeWidth={2}
-                dot={false}
-                activeDot={{ r: 4 }}
-                className="text-primary"
-              />
-            </LineChart>
-          </ResponsiveContainer>
+                <XAxis
+                  dataKey="date"
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={10}
+                  className="text-xs"
+                />
+
+                <YAxis
+                  domain={["auto", "auto"]}
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={10}
+                  width={45}
+                  tickFormatter={(value: number) => value.toFixed(0)}
+                  className="text-xs"
+                />
+
+                <Tooltip
+                  contentStyle={{
+                    borderRadius: "10px",
+                    border: "1px solid hsl(var(--border))",
+                    background: "hsl(var(--background))",
+                  }}
+                  formatter={(value: number) => [
+                    `${Number(value).toFixed(2)} ETB`,
+                    rateLabels[rateType],
+                  ]}
+                />
+
+                <Line
+                  type="monotone"
+                  dataKey={rateType}
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  dot={false}
+                  activeDot={{ r: 4 }}
+                  className="text-primary"
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          )}
         </div>
 
         {/* Period */}

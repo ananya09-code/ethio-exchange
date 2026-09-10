@@ -1,19 +1,31 @@
 import type { Column } from "@/components/common-ui/Table";
-import { TrendingDown, TrendingUp } from "lucide-react";
-import { rates } from "./data";
 
-export const rateColumns: Column<(typeof rates)[number]>[] = [
+import { TrendingDown, TrendingUp } from "lucide-react";
+
+export type Rate = {
+  id: number;
+  bank_id: number;
+  bank_name: string;
+  currency: string;
+  name: string;
+  buy: number;
+  sell: number;
+  created_at: string;
+};
+
+export const rateColumns: Column<Rate>[] = [
   {
     key: "currency",
     header: "Currency",
     render: (rate) => (
       <div className="flex items-center gap-3">
-        <div className="flex size-9 items-center justify-center rounded-lg bg-muted text-xs font-semibold">
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-xs font-semibold">
           {rate.currency}
         </div>
 
-        <div>
-          <p className="font-medium">{rate.name}</p>
+        <div className="min-w-0">
+          <p className="truncate font-medium">{rate.name}</p>
+
           <p className="text-xs text-muted-foreground">{rate.currency}/ETB</p>
         </div>
       </div>
@@ -21,47 +33,42 @@ export const rateColumns: Column<(typeof rates)[number]>[] = [
   },
 
   {
+    key: "bank_name",
+    header: "Bank",
+    render: (rate) => <span className="font-medium">{rate.bank_name}</span>,
+  },
+
+  {
     key: "buy",
     header: "Buy",
-    render: (rate) => rate.buy.toFixed(2),
+    render: (rate) => (
+      <span className="font-medium">{rate.buy.toFixed(2)}</span>
+    ),
   },
 
   {
     key: "sell",
     header: "Sell",
-    render: (rate) => rate.sell.toFixed(2),
-  },
-
-  {
-    key: "average",
-    header: "Average",
-    render: (rate) => rate.average.toFixed(2),
-  },
-
-  {
-    key: "change",
-    header: "24h Change",
     render: (rate) => (
-      <div
-        className={
-          rate.change >= 0
-            ? "flex items-center gap-1 text-green-600"
-            : "flex items-center gap-1 text-red-600"
-        }
-      >
-        {rate.change >= 0 ? (
-          <TrendingUp className="size-3.5" />
-        ) : (
-          <TrendingDown className="size-3.5" />
-        )}
-        {Math.abs(rate.change).toFixed(2)}%
-      </div>
+      <span className="font-medium">{rate.sell.toFixed(2)}</span>
     ),
   },
 
   {
-    key: "updated",
+    key: "created_at",
     header: "Updated",
     className: "text-right",
+    render: (rate) => {
+      const date = new Date(rate.created_at);
+
+      return (
+        <span className="text-sm text-muted-foreground">
+          {date.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </span>
+      );
+    },
   },
 ];

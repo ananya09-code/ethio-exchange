@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import type { ReactNode } from "react";
-
+import type { Rates } from "../../lib/ratescolumn";
 export type Column<T> = {
   key: string;
   header: string;
@@ -19,7 +19,7 @@ type DataTableProps<T> = {
   title: string;
   description?: string;
   columns: Column<T>[];
-  data: T[];
+  data: Rates;
 };
 
 export default function DataTable<T>({
@@ -53,7 +53,7 @@ export default function DataTable<T>({
           </TableHeader>
 
           <TableBody>
-            {data.map((item, index) => (
+            {data?.map((item: any, index: any) => (
               <TableRow key={index}>
                 {columns.map((column) => (
                   <TableCell key={column.key} className={column.className}>

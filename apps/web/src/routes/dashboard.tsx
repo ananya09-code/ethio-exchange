@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { mata } from "../lib/data";
+
+import { data, actionLook, banks, bankFilterFields, mata } from "../lib/data";
+
 import { Hero } from "../components/dashbored-ui/Hero";
+import InstantConverter from "../components/dashbored-ui/InstantConverter";
+import ExchangeRateChart from "../components/common-ui/ExchangeRateChart";
+
 import StatusCard from "../components/common-ui/StatusCard";
 import DataTable from "../components/common-ui/Table";
 import TableToolbar from "../components/common-ui/TableToolbar";
 import TablePagination from "../components/common-ui/TablePagination";
+
 import { bankColumns } from "../lib/bankcolumn";
-import { data, actionLook, banks, bankFilterFields } from "../lib/data";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
@@ -41,6 +46,13 @@ function Dashboard() {
           ))}
         </div>
 
+        {/* Exchange Rate Chart + Converter */}
+        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
+          <ExchangeRateChart />
+
+          <InstantConverter />
+        </div>
+
         {/* Banks */}
         <div className="mt-6">
           <div className="mb-3 flex items-center justify-end">
@@ -72,6 +84,7 @@ function Dashboard() {
             columns={bankColumns}
             data={banks}
           />
+
           <TablePagination
             currentPage={mata.page}
             totalPages={mata.total_pages}

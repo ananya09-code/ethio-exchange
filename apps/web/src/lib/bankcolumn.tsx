@@ -2,6 +2,7 @@ import type { Column } from "@/components/common-ui/Table";
 
 export type Bank = {
   name: string;
+  currency: string;
   buy: number;
   sell: number;
   spread: number;
@@ -12,15 +13,16 @@ export const bankColumns: Column<Bank>[] = [
   {
     key: "name",
     header: "Bank",
-    render: (bank: any) => (
+    render: (bank) => (
       <div className="flex items-center gap-3">
-        <div className="flex size-9 items-center justify-center rounded-lg bg-muted text-xs font-semibold">
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-xs font-semibold text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
           {bank.name.slice(0, 2).toUpperCase()}
         </div>
 
         <div>
           <p className="font-medium">{bank.name}</p>
-          <p className="text-xs text-muted-foreground">USD / ETB</p>
+
+          <p className="text-xs text-muted-foreground">{bank.currency} / ETB</p>
         </div>
       </div>
     ),
@@ -29,7 +31,11 @@ export const bankColumns: Column<Bank>[] = [
   {
     key: "buy",
     header: "Buy",
-    render: (bank) => bank.buy.toFixed(2),
+    render: (bank) => (
+      <span className="font-medium text-blue-600 dark:text-blue-400">
+        {bank.buy.toFixed(2)}
+      </span>
+    ),
   },
 
   {
